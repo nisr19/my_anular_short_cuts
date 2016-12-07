@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Example - example-example33-production</title>
+  
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.6/angular.min.js"></script>
+  
+</head>
+<body ng-app="formExample">
+  <div ng-controller="ExampleController">
+        <div class="card-content" ng-if="countOfServicesCodesEval != 0" ng-repeat="date in countOfServicesCodesParts" >
+    <table class="table table-striped">
+      <tr >
+        <span span ng-if="countOfServicesCodes != 0" style="font-weight:bold">
+          date start {{date.start}} date end: {{date.end}}
+        </span>
+      </tr>
+      <div >
+        <tr >
+          <td class="col-md-2"><span ng-if="countOfServicesCodes != 0" > number:</span></td>
+          <td class="col-md-2"><text class="text-info">{{days($index)}}</text></td>
+        </tr>
+      </div>
+    </table>
+  </div>
+</div>
+
+<style type="text/css">
+  .css-form input.ng-invalid {
+    
+    background-color: red;
+  }
+
+  .css-form input.ng-valid {
+    background-color: white;
+  }
+  
+</style>
+
+<script>
+  angular.module('formExample', [])
+    .controller('ExampleController', function($scope) {
+       $scope.countOfServicesCodesParts = [ {
+        start: "09. 09. 2016",
+        end: "13. 09. 2016"
+      },
+      {
+        start: "15. 09. 2016",
+        end: "18. 09. 2016"
+      },
+      {
+        start: "27. 09. 2016",
+        end: "30. 09. 2016"
+      }
+    ]
+        $scope.countOfServicesCodesByElements = [{
+        "count": 23
+      },
+      {
+        "count": 30
+      },
+      {
+        "count": 20
+      },
+      {
+        "count": 2
+      }
+    ]
+   $scope.days=function(x){
+      return $scope.countOfServicesCodesByElements[x].count;
+    }
+    });
+</script>
+</body>
+</html>
