@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Example - example-example33-production</title>
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
+  
+</head>
+<body ng-app="myApp">
+ <div ng-controller="Ctrl1">
+      <button ng-repeat="type in testDirectiveJson" ng-click="setDirective(type)">{{type}}</button> {{newDirective}}
+    
+     <load-directive type="newDirective"></load-directive>
+   
+</div>
+</div>
+
+<style type="text/css">
+  .css-form input.ng-invalid {
+    
+    background-color: red;
+  }
+
+  .css-form input.ng-valid {
+    background-color: white;
+  }
+  
+</style>
+
+<script>
+var app = angular.module('myApp', []);
+ app.controller('Ctrl1', function($scope) {
+     $scope.testDirectiveJson = {
+         first: '1-directive',
+         sec: '2-directive',
+         third: '3-directive',
+     }
+     $scope.lastName = "Doe";
+     $scope.newDirective = ""
+     $scope.setDirective = function(type) {
+         console.log(type);
+         $scope.newDirective = type;
+       
+     }
+ }).directive("loadDirective", function($compile) {
+     return {
+         scope: {
+             Dtype: '=type'
+         },
+        // replace:true,
+         link: function(scope, element) {
+         
+         		 scope.$watch('Dtype', function() {
+        			var generatedTemplate = '<div ' + scope.Dtype +
+                 ' ></div>';
+                 
+                 
+             element.html($compile(generatedTemplate)(scope));
+    				});
+
+             
+         },
+         restrict: 'E'
+     };
+ }).directive("1Directive", function() {
+
+     return {
+         restrict: 'A',
+      //   replace:true,
+         template: "<h1>Made by a directive A!</h1>"
+     };
+ }).directive("2Directive", function() {
+     return {
+         restrict: 'A',
+        // replace:true,
+         template: "<h1>Made by a directive! B</h1>"
+     };
+ }).directive("3Directive", function() {
+     return {
+         restrict: 'A',
+       //  replace:true,
+         template: "<h1>Made by a directive! C</h1>"
+     };
+ });
+</script>
+</body>
+</html>
